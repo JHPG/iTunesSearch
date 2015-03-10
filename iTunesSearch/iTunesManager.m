@@ -34,7 +34,7 @@ static bool isFirstAccess = YES;
         termo = @"";
     }
     
-    NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=movie", termo];
+    NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=all", termo];
     NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     
     NSError *error;
@@ -57,6 +57,7 @@ static bool isFirstAccess = YES;
         [filme setDuracao:[item objectForKey:@"trackTimeMillis"]];
         [filme setGenero:[item objectForKey:@"primaryGenreName"]];
         [filme setPais:[item objectForKey:@"country"]];
+        [filme setTipo:[item objectForKey:@"kind"]];
         [filmes addObject:filme];
     }
     

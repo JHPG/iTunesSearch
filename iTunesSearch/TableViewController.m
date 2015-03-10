@@ -62,7 +62,8 @@
     Filme *filme = [midias objectAtIndex:indexPath.row];
     
     [celula.nome setText:filme.nome];
-    [celula.tipo setText: NSLocalizedString(@"filmes", nil)];
+    //[celula.tipo setText: NSLocalizedString(@"filmes", nil)];
+    [celula.tipo setText: filme.tipo];
     [celula.genero setText: filme.genero];
     
     return celula;

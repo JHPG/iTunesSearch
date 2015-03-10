@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString *duracao;
 @property (nonatomic, strong) NSString *genero;
 @property (nonatomic, strong) NSString *pais;
+@property (nonatomic, strong) NSString *tipo;
 
 @end
