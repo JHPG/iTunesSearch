@@ -10,8 +10,11 @@
 
 @interface TableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+    @property (strong, nonatomic) IBOutlet UITableView *tableview;
+    @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableview;
+
+- (IBAction)searchBar:(id)sender;
+
 
 @end
-

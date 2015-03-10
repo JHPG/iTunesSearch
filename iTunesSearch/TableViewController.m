@@ -27,11 +27,24 @@
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
-    iTunesManager *itunes = [iTunesManager sharedInstance];
-    midias = [itunes buscarMidias:@"Apple"];
-    
 #warning Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
-    self.tableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 15.f)];
+    
+    CGRect frame = CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 70.f);
+    
+    self.tableview.tableHeaderView = [[UIView alloc] initWithFrame: frame];
+    _searchBar = [[UISearchBar alloc] initWithFrame: frame];
+    
+    _searchBar.delegate = self;
+    _searchBar.backgroundColor = [UIColor whiteColor];
+    _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    //[searchBar addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.tableview.tableHeaderView addSubview: _searchBar];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,8 +75,22 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 80;
 }
+
+- (void)searchBarSearchButtonClicked: (UISearchBar*)searchBar
+{
+    iTunesManager *itunes = [iTunesManager sharedInstance];
+    midias = [itunes buscarMidias: searchBar.text];
+    self.tableview.reloadData;
+}
+
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_searchBar resignFirstResponder];
+}
+
 
 
 @end
