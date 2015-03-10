@@ -19,8 +19,6 @@
 
 @implementation TableViewController
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -38,6 +36,7 @@
     _searchBar.backgroundColor = [UIColor whiteColor];
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _searchBar.placeholder = @"Pesquisa";
     
     //[searchBar addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -81,7 +80,10 @@
 - (void)searchBarSearchButtonClicked: (UISearchBar*)searchBar
 {
     iTunesManager *itunes = [iTunesManager sharedInstance];
-    midias = [itunes buscarMidias: searchBar.text];
+    NSString *texto = searchBar.text;
+    texto = [texto stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+
+    midias = [itunes buscarMidias: texto];
     self.tableview.reloadData;
 }
 
