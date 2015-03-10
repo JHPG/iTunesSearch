@@ -14,7 +14,4 @@
     @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 
-- (IBAction)searchBar:(id)sender;
-
-
 @end

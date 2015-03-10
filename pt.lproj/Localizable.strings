@@ -1,7 +1,15 @@
 /* 
-  dicionario.strings
+  Localizable.strings
   iTunesSearch
 
   Created by Jorge Henrique P. Garcia on 3/10/15.
   Copyright (c) 2015 joaquim. All rights reserved.
 */
+
+
+/* Portuguese */
+
+"pesquisa" = "Pesquisa";
+"filmes" = "Filmes";
+
+

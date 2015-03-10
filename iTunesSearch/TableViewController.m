@@ -36,14 +36,9 @@
     _searchBar.backgroundColor = [UIColor whiteColor];
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _searchBar.placeholder = @"Pesquisa";
-    
-    //[searchBar addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
+    _searchBar.placeholder = NSLocalizedString(@"pesquisa", nil);
     
     [self.tableview.tableHeaderView addSubview: _searchBar];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,7 +62,7 @@
     Filme *filme = [midias objectAtIndex:indexPath.row];
     
     [celula.nome setText:filme.nome];
-    [celula.tipo setText:@"Filme"];
+    [celula.tipo setText: NSLocalizedString(@"filmes", nil)];
     [celula.genero setText: filme.genero];
     
     return celula;
@@ -84,7 +79,7 @@
     texto = [texto stringByReplacingOccurrencesOfString:@" " withString:@"-"];
 
     midias = [itunes buscarMidias: texto];
-    self.tableview.reloadData;
+    [self.tableview reloadData];
 }
 
 
