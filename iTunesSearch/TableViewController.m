@@ -9,7 +9,7 @@
 #import "TableViewController.h"
 #import "TableViewCell.h"
 #import "iTunesManager.h"
-#import "Entidades/Filme.h"
+#import "Entidades/Product.h"
 
 @interface TableViewController () {
     NSArray *midias;

@@ -7,7 +7,7 @@
 //
 
 #import "iTunesManager.h"
-#import "Entidades/Filme.h"
+#import "Entidades/Product.h"
 
 @implementation iTunesManager
 
@@ -50,15 +50,15 @@ static bool isFirstAccess = YES;
     NSMutableArray *filmes = [[NSMutableArray alloc] init];
     
     for (NSDictionary *item in resultados) {
-        Filme *filme = [[Filme alloc] init];
-        [filme setNome:[item objectForKey:@"trackName"]];
-        [filme setTrackId:[item objectForKey:@"trackId"]];
-        [filme setArtista:[item objectForKey:@"artistName"]];
-        [filme setDuracao:[item objectForKey:@"trackTimeMillis"]];
-        [filme setGenero:[item objectForKey:@"primaryGenreName"]];
-        [filme setPais:[item objectForKey:@"country"]];
-        [filme setTipo:[item objectForKey:@"kind"]];
-        [filmes addObject:filme];
+        Product *prod = [[Product alloc] init];
+        [prod setNome:[item objectForKey:@"trackName"]];
+        [prod setTrackId:[item objectForKey:@"trackId"]];
+        [prod setArtista:[item objectForKey:@"artistName"]];
+        [prod setDuracao:[item objectForKey:@"trackTimeMillis"]];
+        [prod setGenero:[item objectForKey:@"primaryGenreName"]];
+        [prod setPais:[item objectForKey:@"country"]];
+        [prod setTipo:[item objectForKey:@"kind"]];
+        [filmes addObject:prod];
     }
     
     return filmes;

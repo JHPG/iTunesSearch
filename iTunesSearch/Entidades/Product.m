@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 joaquim. All rights reserved.
 //
 
-#import "Filme.h"
+#import "Product.h"
 
-@implementation Filme
+@implementation Product
 
 @end
