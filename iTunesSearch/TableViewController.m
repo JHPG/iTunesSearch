@@ -13,6 +13,7 @@
 
 @interface TableViewController () {
     NSArray *midias;
+    NSMutableArray *songs, *movies, *others, *organiz;
 }
 
 @end
@@ -22,10 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    songs = [[NSMutableArray alloc] init];
+    movies = [[NSMutableArray alloc] init];
+    organiz = [[NSMutableArray alloc] init];
+    
+    
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
-#warning Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
+// Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
     
     CGRect frame = CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 70.f);
     
@@ -49,22 +55,50 @@
 
 #pragma mark - Metodos do UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 3;
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    
+    switch (section) {
+        case 0:
+            return @"Songs"; break;
+        case 1:
+            return @"Movies"; break;
+            
+        default:
+            return @"Outros";
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [midias count];
+    
+    switch (section) {
+    case 0:
+        return songs.count; break;
+    case 1:
+        return [movies count]; break;
+        
+    default:
+        return others.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
-    Filme *filme = [midias objectAtIndex:indexPath.row];
+    Product *prod = [organiz objectAtIndex:indexPath.row];
     
-    [celula.nome setText:filme.nome];
-    //[celula.tipo setText: NSLocalizedString(@"filmes", nil)];
-    [celula.tipo setText: filme.tipo];
-    [celula.genero setText: filme.genero];
+    //if (indexPath.section == 0){    //Se a celula atual for da section 0 (songs)
+    //}
+    
+    //if ([prod.tipo isEqual:@"Song"] && (indexPath.section == 0)) {
+
+        [celula.nome setText:prod.nome];
+        [celula.tipo setText: prod.tipo];
+         //[celula.tipo setText: [prod.tipo capitalizedString]];
+        [celula.genero setText: prod.genero];
     
     return celula;
 }
@@ -76,19 +110,36 @@
 - (void)searchBarSearchButtonClicked: (UISearchBar*)searchBar
 {
     iTunesManager *itunes = [iTunesManager sharedInstance];
+    
     NSString *texto = searchBar.text;
     texto = [texto stringByReplacingOccurrencesOfString:@" " withString:@"-"];
 
     midias = [itunes buscarMidias: texto];
+    
+    
+    [songs removeAllObjects];
+    [movies removeAllObjects];
+    [others removeAllObjects];
+    [organiz removeAllObjects];
+    //Adicionar outros aqui
+    
+    for(Product *p in midias){
+        //NSLog(p.tipo);
+        if([p.tipo isEqualToString:@"song"]) [songs addObject: p];
+        if([p.tipo isEqualToString:@"feature-movie"]) [movies addObject: p];
+        //Adicionar outros aqui
+        else [others addObject: p];
+    }
+    [organiz addObjectsFromArray: songs];
+    [organiz addObjectsFromArray: movies];
+    [organiz addObjectsFromArray: others];
+    //Adicionar outros aqui
     [self.tableview reloadData];
 }
-
-
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [_searchBar resignFirstResponder];
 }
-
 
 
 @end
