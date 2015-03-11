@@ -14,6 +14,7 @@
 static iTunesManager *SINGLETON = nil;
 
 static bool isFirstAccess = YES;
+NSDictionary *resultado;
 
 #pragma mark - Public Method
 
@@ -35,12 +36,21 @@ static bool isFirstAccess = YES;
     }
     
     NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=all", termo];
-    NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     
     NSError *error;
-    NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:NSJSONReadingMutableContainers
+    
+    @try{
+        NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
+        NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                options:NSJSONReadingMutableContainers
                                                                 error:&error];
+    } @catch(NSException *e){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro"
+                    message:@"Aparentemente o serviço está indisponível no momento. Tente mais tarde."
+                    delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    
     if (error) {
         NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
         return nil;
