@@ -125,8 +125,10 @@
     
     for(Product *p in midias){
         //NSLog(p.tipo);
-        if([p.tipo isEqualToString:@"song"]) [songs addObject: p];
-        if([p.tipo isEqualToString:@"feature-movie"]) [movies addObject: p];
+        if([p.tipo isEqualToString:@"song"])
+            [songs addObject: p];
+        if([p.tipo isEqualToString:@"feature-movie"])
+            [movies addObject: p];
         //Adicionar outros aqui
         else [others addObject: p];
     }

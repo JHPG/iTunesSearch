@@ -41,7 +41,7 @@ NSDictionary *resultado;
     
     @try{
         NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-        NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+        resultado = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                 options:NSJSONReadingMutableContainers
                                                                 error:&error];
     } @catch(NSException *e){
