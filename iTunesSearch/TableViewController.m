@@ -13,7 +13,7 @@
 
 @interface TableViewController () {
     NSArray *midias;
-    NSMutableArray *songs, *movies, *others, *organiz;
+    NSMutableArray *songs, *movies, *others;
 }
 
 @end
@@ -26,7 +26,6 @@
     songs = [[NSMutableArray alloc] init];
     movies = [[NSMutableArray alloc] init];
     others = [[NSMutableArray alloc] init];
-    organiz = [[NSMutableArray alloc] init];
     
     
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
@@ -45,43 +44,46 @@
     _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _searchBar.placeholder = NSLocalizedString(@"pesquisa", nil);
     
+    
     [self.tableview.tableHeaderView addSubview: _searchBar];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Metodos do UITableViewDataSource
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    switch (section) {
-        case 0:
-            return @"Songs"; break;
-        case 1:
-            return @"Movies"; break;
-            
-        default:
-            return @"Outros";
-    }
+    if(midias.count != 0){
+        switch (section) {
+            case 0:
+                return NSLocalizedString(@"musicas", nil); break;
+            case 1:
+                return NSLocalizedString(@"filmes", nil); break;
+                
+            default:
+                return NSLocalizedString(@"outros", nil);
+        }
+    } else
+        return nil;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     switch (section) {
-    case 0:
-        return songs.count; break;
-    case 1:
-        return [movies count]; break;
-        
-    default:
-        return others.count;
+        case 0:
+            return songs.count; break;
+        case 1:
+            return [movies count]; break;
+            
+        default:
+            return others.count;
     }
 }
 
@@ -89,12 +91,26 @@
     
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
-    Product *prod = [organiz objectAtIndex:indexPath.row];
-
+    
+    
+    Product *prod = nil;
+    switch (indexPath.section) {
+        case 0 :
+            prod = [songs objectAtIndex:indexPath.row];
+            break;
+        case 1:
+            prod = [movies objectAtIndex:indexPath.row];
+            break;
+        default:
+            prod = [others objectAtIndex:indexPath.row];
+            break;
+    }
+    
     [celula.nome setText:prod.nome];
     [celula.tipo setText: prod.tipo];
     [celula.tipo setText: [prod.tipo capitalizedString]];   //Title case
     [celula.genero setText: prod.genero];
+    [celula.artist setText: prod.artista];
     
     return celula;
 }
@@ -112,11 +128,9 @@
 
     midias = [itunes buscarMidias: texto];
     
-    
     [songs removeAllObjects];
     [movies removeAllObjects];
     [others removeAllObjects];
-    [organiz removeAllObjects];
     //Adicionar outros aqui
     
     for(Product *p in midias){
@@ -128,9 +142,7 @@
         //Adicionar outros aqui
         else [others addObject: p];
     }
-    [organiz addObjectsFromArray: songs];
-    [organiz addObjectsFromArray: movies];
-    [organiz addObjectsFromArray: others];
+    
     //Adicionar outros aqui
     [self.tableview reloadData];
 }
