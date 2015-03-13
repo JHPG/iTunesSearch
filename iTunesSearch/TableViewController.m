@@ -10,6 +10,7 @@
 #import "TableViewCell.h"
 #import "iTunesManager.h"
 #import "Entidades/Product.h"
+#import "DetailViewController.h"
 
 @interface TableViewController () {
     NSArray *midias;
@@ -27,13 +28,16 @@
     movies = [[NSMutableArray alloc] init];
     others = [[NSMutableArray alloc] init];
     
-    
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
 // Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
-    
     CGRect frame = CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 70.f);
+    
+    UINavigationItem *nItem = [[UINavigationItem alloc] initWithTitle: @"Busca iTunes"];
+    //[self.navigationController.navigationBar];
+    
+    self.navigationController.title = @"adsasdasdads";
     
     self.tableview.tableHeaderView = [[UIView alloc] initWithFrame: frame];
     _searchBar = [[UISearchBar alloc] initWithFrame: frame];
@@ -148,8 +152,38 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [_searchBar resignFirstResponder];
+//    [_searchBar resignFirstResponder];
+//    [self resignFirstResponder];
+//    self.tableview.editing = NO;
+//    [self.tableview endEditing:YES];
+    
+    //Nada funciona
+
 }
 
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    DetailViewController *view = [[DetailViewController alloc] init];
+    
+    switch (indexPath.section) {
+        case 0 :
+            view.product = [songs objectAtIndex:indexPath.row];
+            break;
+        case 1:
+            view.product = [movies objectAtIndex:indexPath.row];
+            break;
+        default:
+            view.product = [others objectAtIndex:indexPath.row];
+            break;
+    }
+    [self.navigationController pushViewController:view animated:YES];
+}
+
 @end
+
+
+
+
+
+
+

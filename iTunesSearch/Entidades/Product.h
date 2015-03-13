@@ -18,4 +18,5 @@
 @property (nonatomic, strong) NSString *pais;
 @property (nonatomic, strong) NSString *tipo;
 
+
 @end

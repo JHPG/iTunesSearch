@@ -18,6 +18,8 @@
 		92C21CE21AAE76930052ABE6 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92C21CE01AAE76930052ABE6 /* TableViewCell.xib */; };
 		92C21CE81AAE858E0052ABE6 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C21CE71AAE858E0052ABE6 /* Product.m */; };
 		D66572911AAF6932007C0E91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D66572931AAF6932007C0E91 /* Localizable.strings */; };
+		D69E54B81AB3332F00A58B94 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69E54B61AB3332F00A58B94 /* DetailViewController.m */; };
+		D69E54B91AB3332F00A58B94 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D69E54B71AB3332F00A58B94 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		D66572921AAF6932007C0E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D66572951AAF6D39007C0E91 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D66572961AAF6D47007C0E91 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D69E54B51AB3332F00A58B94 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		D69E54B61AB3332F00A58B94 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		D69E54B71AB3332F00A58B94 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +107,9 @@
 				92C21CBA1AAE757A0052ABE6 /* TableViewController.h */,
 				92C21CBB1AAE757A0052ABE6 /* TableViewController.m */,
 				92C21CDC1AAE75DC0052ABE6 /* TableView.xib */,
+				D69E54B51AB3332F00A58B94 /* DetailViewController.h */,
+				D69E54B61AB3332F00A58B94 /* DetailViewController.m */,
+				D69E54B71AB3332F00A58B94 /* DetailViewController.xib */,
 				92C21CD91AAE75B30052ABE6 /* iTunesManager.h */,
 				92C21CDA1AAE75B30052ABE6 /* iTunesManager.m */,
 				92C21CC01AAE757A0052ABE6 /* Images.xcassets */,
@@ -239,6 +247,7 @@
 			files = (
 				92C21CC11AAE757A0052ABE6 /* Images.xcassets in Resources */,
 				D66572911AAF6932007C0E91 /* Localizable.strings in Resources */,
+				D69E54B91AB3332F00A58B94 /* DetailViewController.xib in Resources */,
 				92C21CE21AAE76930052ABE6 /* TableViewCell.xib in Resources */,
 				92C21CDD1AAE75DC0052ABE6 /* TableView.xib in Resources */,
 			);
@@ -264,6 +273,7 @@
 				92C21CE81AAE858E0052ABE6 /* Product.m in Sources */,
 				92C21CE11AAE76930052ABE6 /* TableViewCell.m in Sources */,
 				92C21CB61AAE757A0052ABE6 /* main.m in Sources */,
+				D69E54B81AB3332F00A58B94 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
