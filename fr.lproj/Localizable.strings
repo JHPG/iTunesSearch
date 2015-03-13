@@ -11,6 +11,8 @@
 
 "pesquisa" = "Recherche";
 "filmes" = "Films";
-//"musicas" = "Songs";
-//"outros" = "Others";
+
+
+"musicas" = "Songs";
+"outros" = "Others";
 

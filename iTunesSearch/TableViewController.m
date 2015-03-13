@@ -34,10 +34,10 @@
 // Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
     CGRect frame = CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 70.f);
     
-    UINavigationItem *nItem = [[UINavigationItem alloc] initWithTitle: @"Busca iTunes"];
-    //[self.navigationController.navigationBar];
+    UINavigationItem *nItem = [[UINavigationItem alloc] init];
+    [nItem setTitle: @"iTunes Search"];
+    //[self.navigationController.navigationBar addSubview: nItem]; //n funicona
     
-    self.navigationController.title = @"adsasdasdads";
     
     self.tableview.tableHeaderView = [[UIView alloc] initWithFrame: frame];
     _searchBar = [[UISearchBar alloc] initWithFrame: frame];
@@ -48,8 +48,8 @@
     _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _searchBar.placeholder = NSLocalizedString(@"pesquisa", nil);
     
-    
     [self.tableview.tableHeaderView addSubview: _searchBar];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,7 +111,6 @@
     }
     
     [celula.nome setText:prod.nome];
-    [celula.tipo setText: prod.tipo];
     [celula.tipo setText: [prod.tipo capitalizedString]];   //Title case
     [celula.genero setText: prod.genero];
     [celula.artist setText: prod.artista];
