@@ -25,6 +25,7 @@
     
     songs = [[NSMutableArray alloc] init];
     movies = [[NSMutableArray alloc] init];
+    others = [[NSMutableArray alloc] init];
     organiz = [[NSMutableArray alloc] init];
     
     
@@ -89,16 +90,11 @@
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
     Product *prod = [organiz objectAtIndex:indexPath.row];
-    
-    //if (indexPath.section == 0){    //Se a celula atual for da section 0 (songs)
-    //}
-    
-    //if ([prod.tipo isEqual:@"Song"] && (indexPath.section == 0)) {
 
-        [celula.nome setText:prod.nome];
-        [celula.tipo setText: prod.tipo];
-         //[celula.tipo setText: [prod.tipo capitalizedString]];
-        [celula.genero setText: prod.genero];
+    [celula.nome setText:prod.nome];
+    [celula.tipo setText: prod.tipo];
+    [celula.tipo setText: [prod.tipo capitalizedString]];   //Title case
+    [celula.genero setText: prod.genero];
     
     return celula;
 }
@@ -127,7 +123,7 @@
         //NSLog(p.tipo);
         if([p.tipo isEqualToString:@"song"])
             [songs addObject: p];
-        if([p.tipo isEqualToString:@"feature-movie"])
+        else if([p.tipo isEqualToString:@"feature-movie"])
             [movies addObject: p];
         //Adicionar outros aqui
         else [others addObject: p];
