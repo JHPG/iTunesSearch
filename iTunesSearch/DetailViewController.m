@@ -16,8 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
- //   self.navigationController.navigationBar
+    
+    [_imgDetails setImage:_product.img];
+    [_tipoMidia setText: [_product.tipo capitalizedString]];
+    [_nome setText: _product.nome];
+    [_artist setText:_product.artista];
+    [_genre setText:_product.genero];
+    [_duracao setText:_product.genero];
+    [_country setText:_product.pais];
+     
 }
 
 - (void)didReceiveMemoryWarning {

@@ -68,6 +68,21 @@ NSDictionary *resultado;
         [prod setGenero:[item objectForKey:@"primaryGenreName"]];
         [prod setPais:[item objectForKey:@"country"]];
         [prod setTipo:[item objectForKey:@"kind"]];
+        
+        
+        NSURL *imageURL = [NSURL URLWithString: [item objectForKey:@"artworkUrl100"]];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [prod setImg:[UIImage imageWithData:imageData]];
+            });
+        });
+        
+        //Add previewURL com preview da midia
+        
         [filmes addObject:prod];
     }
     

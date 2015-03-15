@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Product : NSObject
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSString *genero;
 @property (nonatomic, strong) NSString *pais;
 @property (nonatomic, strong) NSString *tipo;
+@property (nonatomic, strong) UIImage *img;
 
 
 @end
