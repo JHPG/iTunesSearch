@@ -24,7 +24,8 @@
     [_genre setText:_product.genero];
     [_duracao setText:_product.genero];
     [_country setText:_product.pais];
-     
+    
+    [_imgDetails.layer setCornerRadius:10.0];
 }
 
 - (void)didReceiveMemoryWarning {
