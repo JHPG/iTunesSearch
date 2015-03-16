@@ -106,6 +106,7 @@ NSDictionary *resultado;
         [prod setGenero:[item objectForKey:@"primaryGenreName"]];
         [prod setPais:[item objectForKey:@"country"]];
         [prod setTipo:[item objectForKey:@"kind"]];
+        [prod setPreco:[item objectForKey:@"trackPrice"]];
         [prod setPreview:[item objectForKey:@"previewUrl"]];
         
         NSURL *imageURL = [NSURL URLWithString: [item objectForKey:@"artworkUrl100"]];

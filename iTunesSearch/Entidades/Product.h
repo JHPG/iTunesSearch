@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *genero;
 @property (nonatomic, strong) NSString *pais;
 @property (nonatomic, strong) NSString *tipo;
+@property (nonatomic, strong) NSString *preco;
 @property (nonatomic, strong) UIImage *img;
 @property (nonatomic, strong) NSString *preview;
 

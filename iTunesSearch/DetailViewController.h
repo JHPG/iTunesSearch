@@ -14,12 +14,12 @@
 @property Product *product;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgDetails;
-@property (weak, nonatomic) IBOutlet UILabel *tipoMidia;
 @property (weak, nonatomic) IBOutlet UILabel *nome;
 @property (weak, nonatomic) IBOutlet UILabel *artist;
 @property (weak, nonatomic) IBOutlet UILabel *genre;
 @property (weak, nonatomic) IBOutlet UILabel *duracao;
 @property (weak, nonatomic) IBOutlet UILabel *country;
+@property (weak, nonatomic) IBOutlet UILabel *price;
 
 
 

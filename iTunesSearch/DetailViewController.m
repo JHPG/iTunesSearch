@@ -19,9 +19,8 @@
     [super viewDidLoad];
     
     [_imgDetails setImage:_product.img];
-    [_tipoMidia setText:[NSString stringWithFormat:@"%@", [_product.tipo capitalizedString]]];
-    
-    [_tipoMidia setText: [_product.tipo capitalizedString]];
+    [_price setText: [NSString stringWithFormat:
+                       @"%@: $ %@",NSLocalizedString(@"Preco",nil), _product.preco ]];
     [_nome setText: _product.nome];
     [_artist setText:[NSString stringWithFormat:
                        @"%@: %@", NSLocalizedString(@"Artista",nil), _product.artista]];
@@ -49,8 +48,6 @@
     [player play];
     
 }
-
-
 
 /*
 #pragma mark - Navigation

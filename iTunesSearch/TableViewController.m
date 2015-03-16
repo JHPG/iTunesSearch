@@ -113,7 +113,7 @@
     }
     
     [celula.nome setText:prod.nome];
-    [celula.tipo setText: [prod.tipo capitalizedString]];   //Title case
+    [celula.price setText: [NSString stringWithFormat:@"$ %@", prod.preco]];   //Title case
     [celula.genero setText: prod.genero];
     [celula.artist setText: prod.artista];
     [celula.img setImage: prod.img];
