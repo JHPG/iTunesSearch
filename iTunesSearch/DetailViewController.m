@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface DetailViewController ()
 
@@ -26,12 +27,24 @@
     [_country setText:_product.pais];
     
     [_imgDetails.layer setCornerRadius:10.0];
+    
+    //AVPlayer *player = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://a680.phobos.apple.com/us/r1000/170/Music2/v4/de/21/90/de2190f3-8749-3326-880d-c562580ebe1c/mzaf_674204922208643616.aac.m4a"]];
+    
+    AVPlayer *player = [AVPlayer playerWithURL: [NSURL URLWithString: _product.preview]];
+    AVPlayerLayer *layer = [AVPlayerLayer layer];
+    [layer setPlayer:player];
+    
+    //[layer setFrame:CGzRectMake(5, 400, 200, 20)];
+    //[layer setBackgroundColor:[UIColor blackColor].CGColor];
+    //[layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    
+    [self.view.layer addSublayer:layer];
+    
+    [player play];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 /*
 #pragma mark - Navigation

@@ -35,15 +35,47 @@ NSDictionary *resultado;
         termo = @"";
     }
     
-    NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=all", termo];
+    NSString *url = [NSString stringWithFormat:
+                     @"https://itunes.apple.com/search?term=%@&media=music&limit=10", termo];
+    NSString *url1 = [NSString stringWithFormat:
+                     @"https://itunes.apple.com/search?term=%@&media=movie&limit=10", termo];
+    NSString *url2= [NSString stringWithFormat:
+                     @"https://itunes.apple.com/search?term=%@&media=podcast&limit=10", termo];
+    NSString *url3 = [NSString stringWithFormat:
+                      @"https://itunes.apple.com/search?term=%@&media=ebook&limit=10", termo];
     
     NSError *error;
+    NSMutableArray *resultados = [[NSMutableArray alloc] init];
     
     @try{
+    //Musica
         NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
         resultado = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:NSJSONReadingMutableContainers
-                                                                error:&error];
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        [resultados addObjectsFromArray: [resultado objectForKey:@"results"]];
+        
+    //Filmes
+        jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url1]];
+        resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        [resultados addObjectsFromArray: [resultado objectForKey:@"results"]];
+        
+    //Podcast
+        jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url2]];
+        resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        [resultados addObjectsFromArray: [resultado objectForKey:@"results"]];
+        
+    //Ebook
+        jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url3]];
+        resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        [resultados addObjectsFromArray: [resultado objectForKey:@"results"]];
+        
     } @catch(NSException *e){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro"
                     message:@"Aparentemente o serviço está indisponível no momento. Tente mais tarde."
@@ -56,11 +88,15 @@ NSDictionary *resultado;
         return nil;
     }
     
-    NSArray *resultados = [resultado objectForKey:@"results"];
-    NSMutableArray *filmes = [[NSMutableArray alloc] init];
+    //[resultados addObjectsFromArray: [resultado objectForKey:@"results"]];
+    
+    NSMutableArray *midia = [[NSMutableArray alloc] init];
+    
+    double doubleValue = [@"11" doubleValue];
     
     for (NSDictionary *item in resultados) {
         Product *prod = [[Product alloc] init];
+        
         [prod setNome:[item objectForKey:@"trackName"]];
         [prod setTrackId:[item objectForKey:@"trackId"]];
         [prod setArtista:[item objectForKey:@"artistName"]];
@@ -68,7 +104,7 @@ NSDictionary *resultado;
         [prod setGenero:[item objectForKey:@"primaryGenreName"]];
         [prod setPais:[item objectForKey:@"country"]];
         [prod setTipo:[item objectForKey:@"kind"]];
-        
+        [prod setPreview:[item objectForKey:@"previewUrl"]];
         
         NSURL *imageURL = [NSURL URLWithString: [item objectForKey:@"artworkUrl100"]];
         
@@ -83,10 +119,10 @@ NSDictionary *resultado;
         
         //Add previewURL com preview da midia
         
-        [filmes addObject:prod];
+        [midia addObject:prod];
     }
     
-    return filmes;
+    return midia;
 }
 
 

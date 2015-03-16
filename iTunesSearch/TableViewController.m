@@ -14,7 +14,7 @@
 
 @interface TableViewController () {
     NSArray *midias;
-    NSMutableArray *songs, *movies, *others;
+    NSMutableArray *songs, *movies, *podcast, *ebook, *others;
 }
 
 @end
@@ -26,6 +26,8 @@
     
     songs = [[NSMutableArray alloc] init];
     movies = [[NSMutableArray alloc] init];
+    podcast = [[NSMutableArray alloc] init];
+    ebook = [[NSMutableArray alloc] init];
     others = [[NSMutableArray alloc] init];
     
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
@@ -63,19 +65,22 @@
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    NSString *sec = nil;
     
-    if(midias.count != 0){
-        switch (section) {
-            case 0:
-                return NSLocalizedString(@"musicas", nil); break;
-            case 1:
-                return NSLocalizedString(@"filmes", nil); break;
-                
-            default:
-                return NSLocalizedString(@"outros", nil);
-        }
-    } else
-        return nil;
+    switch (section) {
+        case 0:
+            if(songs.count>0) sec= NSLocalizedString(@"musicas", nil); break;
+        case 1:
+            if(movies.count>0) sec=  NSLocalizedString(@"filmes", nil); break;
+        case 2:
+            if(podcast.count>0) sec=  NSLocalizedString(@"podcast", nil); break;
+        case 3:
+            if(ebook.count>0) sec= NSLocalizedString(@"ebook", nil); break;
+            
+        default:
+            if(others.count>0) sec= NSLocalizedString(@"outros", nil);
+    }
+    return sec;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -85,6 +90,10 @@
             return songs.count; break;
         case 1:
             return [movies count]; break;
+        case 2:
+            return podcast.count; break;
+        case 3:
+            return [ebook count]; break;
             
         default:
             return others.count;
@@ -100,11 +109,13 @@
     Product *prod = nil;
     switch (indexPath.section) {
         case 0 :
-            prod = [songs objectAtIndex:indexPath.row];
-            break;
-        case 1:
-            prod = [movies objectAtIndex:indexPath.row];
-            break;
+            prod = [songs objectAtIndex:indexPath.row]; break;
+        case 1 :
+            prod = [movies objectAtIndex:indexPath.row]; break;
+        case 2 :
+            prod = [podcast objectAtIndex:indexPath.row]; break;
+        case 3 :
+            prod = [ebook objectAtIndex:indexPath.row]; break;
         default:
             prod = [others objectAtIndex:indexPath.row];
             break;
@@ -137,24 +148,38 @@
     //Adicionar outros aqui
     
     for(Product *p in midias){
-        //NSLog(p.tipo);
+        
         if([p.tipo isEqualToString:@"song"])
             [songs addObject: p];
         else if([p.tipo isEqualToString:@"feature-movie"])
             [movies addObject: p];
+        else if([p.tipo isEqualToString:@"podcast"])
+            [podcast addObject: p];
+        else if([p.tipo isEqualToString:@"ebook"])
+            [ebook addObject: p];
+        
         //Adicionar outros aqui
         else [others addObject: p];
     }
     
     //Adicionar outros aqui
     [self.tableview reloadData];
+    [_searchBar resignFirstResponder];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-//    [_searchBar resignFirstResponder];
-//    [self resignFirstResponder];
-//    self.tableview.editing = NO;
-//    [self.tableview endEditing:YES];
+   
+    [_searchBar resignFirstResponder];
+   [self resignFirstResponder];
+    
+    [self.searchBar endEditing:YES];
+    
+    self.tableview.editing = NO;
+    [self.tableview endEditing:YES];
+    
+    self.editing = NO;
+    
+    NSLog(@"touch event dispared");
     
     //Nada funciona
 
@@ -166,14 +191,15 @@
     
     switch (indexPath.section) {
         case 0 :
-            view.product = [songs objectAtIndex:indexPath.row];
-            break;
+            view.product = [songs objectAtIndex:indexPath.row]; break;
         case 1:
-            view.product = [movies objectAtIndex:indexPath.row];
-            break;
+            view.product = [movies objectAtIndex:indexPath.row]; break;
+        case 2:
+            view.product = [podcast objectAtIndex:indexPath.row]; break;
+        case 3:
+            view.product = [ebook objectAtIndex:indexPath.row]; break;
         default:
-            view.product = [others objectAtIndex:indexPath.row];
-            break;
+            view.product = [others objectAtIndex:indexPath.row]; break;
     }
     [self.navigationController pushViewController:view animated:YES];
 }

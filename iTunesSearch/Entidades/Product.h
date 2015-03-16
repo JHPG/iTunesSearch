@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *pais;
 @property (nonatomic, strong) NSString *tipo;
 @property (nonatomic, strong) UIImage *img;
+@property (nonatomic, strong) NSString *preview;
 
 
 @end
