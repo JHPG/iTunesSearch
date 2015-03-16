@@ -13,4 +13,7 @@
 "filmes" = "Filmes";
 "musicas" = "Músicas";
 "outros" = "Outros";
-
+"Duracao" = "Duração";
+"Pais" = "País";
+"Genero" = "Gênero";
+"Artista" = "Artista";

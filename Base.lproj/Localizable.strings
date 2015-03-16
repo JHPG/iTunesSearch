@@ -15,3 +15,7 @@
 "podcast" = "Podcasts";
 "ebook" = "Ebooks";
 "outros" = "Others";
+"Duracao" = "Duration";
+"Pais" = "Country";
+"Genero" = "Genre";
+"Artista" = "Artist";

@@ -92,15 +92,17 @@ NSDictionary *resultado;
     
     NSMutableArray *midia = [[NSMutableArray alloc] init];
     
-    double doubleValue = [@"11" doubleValue];
-    
     for (NSDictionary *item in resultados) {
         Product *prod = [[Product alloc] init];
         
         [prod setNome:[item objectForKey:@"trackName"]];
         [prod setTrackId:[item objectForKey:@"trackId"]];
         [prod setArtista:[item objectForKey:@"artistName"]];
-        [prod setDuracao:[item objectForKey:@"trackTimeMillis"]];
+        
+        double duracao = [[item objectForKey: @"trackTimeMillis"] doubleValue];
+        duracao = (duracao/1000)/60;
+        [prod setDuracao: duracao];
+        
         [prod setGenero:[item objectForKey:@"primaryGenreName"]];
         [prod setPais:[item objectForKey:@"country"]];
         [prod setTipo:[item objectForKey:@"kind"]];

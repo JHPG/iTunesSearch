@@ -36,10 +36,8 @@
 // Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
     CGRect frame = CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 70.f);
     
-    UINavigationItem *nItem = [[UINavigationItem alloc] init];
-    [nItem setTitle: @"iTunes Search"];
-    //[self.navigationController.navigationBar addSubview: nItem]; //n funicona
-    
+    UINavigationItem *navItem = self.navigationController.navigationBar.topItem;
+    navItem.title = @"iTunes Search";
     
     self.tableview.tableHeaderView = [[UIView alloc] initWithFrame: frame];
     _searchBar = [[UISearchBar alloc] initWithFrame: frame];
@@ -51,11 +49,6 @@
     _searchBar.placeholder = NSLocalizedString(@"pesquisa", nil);
     
     [self.tableview.tableHeaderView addSubview: _searchBar];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Metodos do UITableViewDataSource
@@ -104,8 +97,6 @@
     
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
-    
-    
     Product *prod = nil;
     switch (indexPath.section) {
         case 0 :
@@ -125,6 +116,7 @@
     [celula.tipo setText: [prod.tipo capitalizedString]];   //Title case
     [celula.genero setText: prod.genero];
     [celula.artist setText: prod.artista];
+    [celula.img setImage: prod.img];
     
     return celula;
 }
@@ -162,11 +154,11 @@
         else [others addObject: p];
     }
     
-    //Adicionar outros aqui
     [self.tableview reloadData];
     [_searchBar resignFirstResponder];
 }
 
+/*
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
    
     [_searchBar resignFirstResponder];
@@ -183,7 +175,7 @@
     
     //Nada funciona
 
-}
+}*/
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

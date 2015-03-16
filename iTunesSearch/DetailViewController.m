@@ -19,12 +19,18 @@
     [super viewDidLoad];
     
     [_imgDetails setImage:_product.img];
+    [_tipoMidia setText:[NSString stringWithFormat:@"%@", [_product.tipo capitalizedString]]];
+    
     [_tipoMidia setText: [_product.tipo capitalizedString]];
     [_nome setText: _product.nome];
-    [_artist setText:_product.artista];
-    [_genre setText:_product.genero];
-    [_duracao setText:_product.genero];
-    [_country setText:_product.pais];
+    [_artist setText:[NSString stringWithFormat:
+                       @"%@: %@", NSLocalizedString(@"Artista",nil), _product.artista]];
+    [_genre setText:[NSString stringWithFormat:
+                       @"%@: %@", NSLocalizedString(@"Genero",nil), _product.genero]];
+    [_duracao setText:[NSString stringWithFormat:
+                       @"%@: %2.f min", NSLocalizedString(@"Duracao",nil), _product.duracao]];
+    [_country setText:[NSString stringWithFormat:
+                       @"%@: %@",  NSLocalizedString(@"Pais",nil), _product.pais]];
     
     [_imgDetails.layer setCornerRadius:10.0];
     
